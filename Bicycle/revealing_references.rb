@@ -5,10 +5,19 @@ class RevealingReferences
         @wheels = wheelify(data)
     end
 
+    # 배열을 하나씩 훑는다.
     def diameters
-        wheels.collect do |wheel|
-            wheel.rim + (wheel.tire * 2)
-        end
+        wheels.collect {|wheel| diameter(wheel)}
+    end
+
+    # 바퀴 한 개의 지름을 계산한다.
+    def diameter
+        wheel.rim + (wheel.tire * 2)
+    end
+
+    # 지름을 계산하는 식을 가져와서 사용 (재사용성을 높임)
+    def gear_inched
+        ratio * diameter
     end
 
     Wheel = Struct.new(:rim, :tire)
